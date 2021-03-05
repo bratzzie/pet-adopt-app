@@ -11,7 +11,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import PetListScreen from './app/screens/PetListScreen';
 import PetScreen from './app/screens/PetScreen';
-import ThirdPage from './app/screens/ThirdPage';
+
 
 import dogs from './app/data/Dogs'
 import cats from './app/data/Cats'
@@ -57,7 +57,7 @@ return <MaterialCommunityIcons name={iconName} size={size} color={color}     />;
       inactiveTintColor: 'gray',
       }}
     >
-        <Tab.Screen name="Dogs" component={DogsScreen} />
+        <Tab.Screen name="Dogs" component={PetScreen} />
         <Tab.Screen name="Cats" component={CatsScreen} />
         <Tab.Screen name="Birds" component={BirdsScreen} />
         <Tab.Screen name="Bunnies" component={BunniesScreen} />
@@ -176,7 +176,7 @@ export default function App() {
             size={23}
             name="water" color="grey"/>,
             drawerLabel: 'Donation' }}
-          component={NotificationsScreen}
+          component={PetScreen}
         />
         <Drawer.Screen
           name="Favorites"
