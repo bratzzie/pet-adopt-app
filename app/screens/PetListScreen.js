@@ -7,14 +7,14 @@ import PetOptionList from '../components/PetOptionList'
 import SearchBar from '../components/SearchBar'
 import SinglePet from '../components/SinglePet'
 
-const PetListScreen = () => {
+const PetListScreen = ({getdata}) => {
     return (
         <PetListSection>
           <Container>
               <SearchBar />
               <PetOptionList />
                 <ListContainer> 
-                   <PetList />
+                   <PetList petdata={getdata}/>
                 </ListContainer>
           </Container>
         </PetListSection>

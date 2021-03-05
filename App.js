@@ -13,12 +13,15 @@ import PetListScreen from './app/screens/PetListScreen';
 import PetScreen from './app/screens/PetScreen';
 import ThirdPage from './app/screens/ThirdPage';
 
+import dogs from './app/data/Dogs'
+import cats from './app/data/Cats'
+import birds from './app/data/Birds'
+import bunnies from './app/data/Bunnies'
 // Import Custom Sidebar
 import CustomSidebarMenu from './app/components/CustomSidebarMenu';
 
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Ionicons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
@@ -36,7 +39,7 @@ function HomeScreen() {
         iconName = focused
         ? 'cat'
         : 'cat';
-      } else if( route.name === 'Parrots'){
+      } else if( route.name === 'Birds'){
         iconName = focused 
         ? 'twitter' 
         : 'twitter';
@@ -54,10 +57,10 @@ return <MaterialCommunityIcons name={iconName} size={size} color={color}     />;
       inactiveTintColor: 'gray',
       }}
     >
-        <Tab.Screen name="Dogs" component={TabAScreen} />
-        <Tab.Screen name="Cats" component={TabBScreen} />
-        <Tab.Screen name="Parrots" component={TabBScreen} />
-        <Tab.Screen name="Bunnies" component={TabBScreen} />
+        <Tab.Screen name="Dogs" component={DogsScreen} />
+        <Tab.Screen name="Cats" component={CatsScreen} />
+        <Tab.Screen name="Birds" component={BirdsScreen} />
+        <Tab.Screen name="Bunnies" component={BunniesScreen} />
 
 
 
@@ -78,43 +81,49 @@ function NotificationsScreen({ navigation }) {
 }
 
 const Stack = createStackNavigator();
-function TabAScreen() {
+
+function DogsScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="TabA Home" component={TabADetailsScreen} />
-      <Stack.Screen name="TabA Details" component={Details} />
+      <Stack.Screen name="Dogs Section">
+          {props => <PetListScreen {...props} getdata={dogs} />} 
+      </Stack.Screen>
+       
     </Stack.Navigator>
   );
 }
-function TabADetailsScreen({navigation}) {
+
+function CatsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
-      <Text>
-        Welcome to TabA page!
-      </Text>
-      <Button 
-      onPress={() => navigation.navigate('TabA Details')}
-      title="Go to TabA Details"
-      />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Cats Section">
+          {props => <PetListScreen {...props} getdata={cats} />} 
+      </Stack.Screen>
+    </Stack.Navigator>
+  
   );
 }
-function Details() {
+
+function BirdsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
-      <Text>
-        TabA Details here!
-      </Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Birds Section">
+        {props => <PetListScreen {...props} getdata={birds} />}
+      </Stack.Screen>
+       
+    </Stack.Navigator>
+  
   );
 }
-function TabBScreen() {
+
+function BunniesScreen() {
   return (
-    <View>
-      <Text style={{textAlign: 'center', marginTop: 300}}>
-        Welcome to TabB page!
-      </Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Bunnies Section">
+        {props => <PetListScreen {...props} getdata={bunnies} />} 
+      </Stack.Screen>
+    </Stack.Navigator>
+  
   );
 }
 

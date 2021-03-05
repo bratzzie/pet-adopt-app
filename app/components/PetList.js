@@ -4,14 +4,14 @@ import styled from 'styled-components/native'
 
 import SinglePet from './SinglePet'
 
-import dogs from '../data/Dogs'
+
 import { FlatList } from 'react-native-gesture-handler'
 
-const PetList = () => {
+const PetList = ({petdata}) => {
     return (
         <Container>
             <FlatList  style={styles.flatList}
-            data={dogs} 
+            data={petdata} 
             renderItem={({item}) => <SinglePet pet={item} />}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
