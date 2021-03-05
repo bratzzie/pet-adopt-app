@@ -29,7 +29,7 @@ export default PetOption
 const Container = styled.View`
 align-items: center;
 justify-content: center;
-cursor: pointer;
+
 
 `
 const Wrapper = styled.View`

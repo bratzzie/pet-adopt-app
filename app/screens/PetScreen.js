@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 const PetScreen = () => {
     return (
         <View>
-            <Text></Text>
+            <Text>Second Page</Text>
         </View>
     )
 }
