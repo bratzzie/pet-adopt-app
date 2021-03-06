@@ -1,14 +1,14 @@
 import 'react-native-gesture-handler';
 
 import * as React from 'react';
-import { View, TouchableOpacity, Image, Text , Button} from 'react-native';
+import { View, TouchableOpacity, Image, Text , Button, Platform} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import styled from 'styled-components/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import { SafeAreaView } from 'react-navigation';
 import PetListScreen from './app/screens/PetListScreen';
 import PetScreen from './app/screens/PetScreen';
 
@@ -17,6 +17,7 @@ import dogs from './app/data/Dogs'
 import cats from './app/data/Cats'
 import birds from './app/data/Birds'
 import bunnies from './app/data/Bunnies'
+import photo from './assets/girl.jpg'
 // Import Custom Sidebar
 import CustomSidebarMenu from './app/components/CustomSidebarMenu';
 
@@ -57,7 +58,7 @@ return <MaterialCommunityIcons name={iconName} size={size} color={color}     />;
       inactiveTintColor: 'gray',
       }}
     >
-        <Tab.Screen name="Dogs" component={PetScreen} />
+        <Tab.Screen name="Dogs" component={DogsScreen} />
         <Tab.Screen name="Cats" component={CatsScreen} />
         <Tab.Screen name="Birds" component={BirdsScreen} />
         <Tab.Screen name="Bunnies" component={BunniesScreen} />
@@ -82,10 +83,38 @@ function NotificationsScreen({ navigation }) {
 
 const Stack = createStackNavigator();
 
+function HeaderWrapper() {
+  return (
+    <SafeAreaView>
+    <Header style={{marginTop: Platform.OS == "ios" ? 50 : 0}}>
+        <Row>
+          <Location>Location</Location>
+        </Row>
+        <Row>
+        <MaterialCommunityIcons name="table-of-contents" size={30} color="#515151" 
+        />
+        <Column>
+            <Ionicons name="location-sharp" size={24} color="tomato" />
+            <City>Kyiv, </City>
+            <Country>Ukraine</Country>
+        </Column>
+        <Avatar source={photo} />
+        
+        </Row>
+    </Header>
+    </SafeAreaView>
+    
+  );
+}
+
 function DogsScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Dogs Section">
+      <Stack.Screen name="Dogs Section"  options={{ headerStyle: {
+            height: 100,
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS
+          }, headerTitle: props => <HeaderWrapper {...props} /> }}>
           {props => <PetListScreen {...props} getdata={dogs} />} 
       </Stack.Screen>
        
@@ -93,10 +122,16 @@ function DogsScreen() {
   );
 }
 
+
+
 function CatsScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Cats Section">
+      <Stack.Screen name="Cats Section" options={{ headerStyle: {
+            height: 100,
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS
+          }, headerTitle: props => <HeaderWrapper {...props} /> }}>
           {props => <PetListScreen {...props} getdata={cats} />} 
       </Stack.Screen>
     </Stack.Navigator>
@@ -107,7 +142,11 @@ function CatsScreen() {
 function BirdsScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Birds Section">
+      <Stack.Screen name="Birds Section" options={{ headerStyle: {
+            height: 100,
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS
+          }, headerTitle: props => <HeaderWrapper {...props} /> }}>
         {props => <PetListScreen {...props} getdata={birds} />}
       </Stack.Screen>
        
@@ -119,7 +158,11 @@ function BirdsScreen() {
 function BunniesScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Bunnies Section">
+      <Stack.Screen name="Bunnies Section" options={{ headerStyle: {
+            height: 100,
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS
+          }, headerTitle: props => <HeaderWrapper {...props} /> }}>
         {props => <PetListScreen {...props} getdata={bunnies} />} 
       </Stack.Screen>
     </Stack.Navigator>
@@ -206,3 +249,39 @@ export default function App() {
     </NavigationContainer>
   )
 }
+
+const Header = styled.View`
+background-color: #fff;
+justify-content: center;
+align-items: center;
+margin-top: 50px;
+
+`
+
+const Row = styled.View`
+flex-direction: row;
+justify-content: space-around;
+width: 100%;`
+
+const Location = styled.Text`
+color: #515151;
+align-self: center;
+transform:translate(5px, 5px);`
+
+const Avatar = styled.Image`
+border-radius: 50px;
+width: 30px;
+height: 30px;
+align-self: flex-end;
+`
+
+const City = styled.Text`
+font-weight: bold;`
+
+const Country = styled.Text`
+color: #515151;`
+
+const Column = styled.View`
+flex-direction: row;
+justify-content: center;
+align-items: center;`

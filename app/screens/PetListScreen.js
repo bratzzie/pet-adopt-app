@@ -7,7 +7,8 @@ import PetOptionList from '../components/PetOptionList'
 import SearchBar from '../components/SearchBar'
 import SinglePet from '../components/SinglePet'
 
-const PetListScreen = ({getdata}) => {
+const PetListScreen = ({getdata, navigation}) => {
+  
     return (
         <PetListSection>
           <Container>
@@ -20,6 +21,17 @@ const PetListScreen = ({getdata}) => {
         </PetListSection>
     )
 }
+
+
+PetListScreen.navigationOptions = {
+  title: 'Пациенты',
+  headerTintColor: '#2A86FF',
+  headerStyle: {
+      elevation: 0.8, //android
+      shadowOpacity: 0.8 // IOS
+  }
+};
+
 
 export default PetListScreen
 const PetListSection = styled.View`
