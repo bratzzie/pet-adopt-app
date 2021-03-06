@@ -1,46 +1,42 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import styled from 'styled-components/native'
-import PetList from '../components/PetList'
+import React from "react";
+import styled from "styled-components/native";
 
-import PetOptionList from '../components/PetOptionList'
-import SearchBar from '../components/SearchBar'
-import SinglePet from '../components/SinglePet'
+import PetList from "../components/PetList";
+import SearchBar from "../components/SearchBar";
 
-const PetListScreen = ({getdata, navigation}) => {
-  
-    return (
-        <PetListSection>
-          <Container>
-              <SearchBar />
-              <PetOptionList />
-                <ListContainer> 
-                   <PetList petdata={getdata}/>
-                </ListContainer>
-          </Container>
-        </PetListSection>
-    )
-}
-
-
-PetListScreen.navigationOptions = {
-  title: 'Пациенты',
-  headerTintColor: '#2A86FF',
-  headerStyle: {
-      elevation: 0.8, //android
-      shadowOpacity: 0.8 // IOS
-  }
+const PetListScreen = ({ getdata, navigation }) => {
+  return (
+    <PetListSection>
+      <Container>
+        <Title>Are you ready to adopt a pet?</Title>
+        <SearchBar />
+        <ListContainer>
+          <PetList petdata={getdata} />
+        </ListContainer>
+      </Container>
+    </PetListSection>
+  );
 };
 
-
-export default PetListScreen
+export default PetListScreen;
 const PetListSection = styled.View`
-flex: 1;
-background-color: #ecf0f3;
-align-items: center;
-justify-content: center;
-flex-direction: column;`
+  flex: 1;
+  background-color: #ecf0f3;
 
-const Container = styled.View``
+  flex-direction: column;
+`;
 
-const ListContainer = styled.View``
+const Container = styled.View`
+  width: 100%;
+`;
+
+const ListContainer = styled.View`
+  width: 100%;
+`;
+const Title = styled.Text`
+  font-weight: bold;
+  color: tomato;
+  padding: 30px;
+  padding-bottom: 15px;
+  font-size: 18px;
+`;

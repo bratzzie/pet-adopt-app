@@ -12,7 +12,6 @@ import { SafeAreaView } from 'react-navigation';
 import PetListScreen from './app/screens/PetListScreen';
 import PetScreen from './app/screens/PetScreen';
 
-
 import dogs from './app/data/Dogs'
 import cats from './app/data/Cats'
 import birds from './app/data/Birds'
@@ -69,21 +68,11 @@ return <MaterialCommunityIcons name={iconName} size={size} color={color}     />;
   );
 }
 
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>No New Notifications!</Text>
-      <Button 
-      onPress={() => navigation.goBack()}
-      title="Go back home"
-      />
-    </View>
-  );
-}
-
 const Stack = createStackNavigator();
 
 function HeaderWrapper() {
+  
+
   return (
     <SafeAreaView>
     <Header style={{marginTop: Platform.OS == "ios" ? 50 : 0}}>
@@ -92,8 +81,9 @@ function HeaderWrapper() {
         </Row>
         <Row>
         <MaterialCommunityIcons name="table-of-contents" size={30} color="#515151" 
+        style={{cursor: 'pointer'}}
         />
-        <Column>
+         <Column>
             <Ionicons name="location-sharp" size={24} color="tomato" />
             <City>Kyiv, </City>
             <Country>Ukraine</Country>
@@ -109,12 +99,13 @@ function HeaderWrapper() {
 
 function DogsScreen() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Dogs Section"  options={{ headerStyle: {
+    <Stack.Navigator >
+      <Stack.Screen name="Dogs Section"  options={{ 
+        headerStyle: {
             height: 100,
             elevation: 0, // remove shadow on Android
             shadowOpacity: 0, // remove shadow on iOS
-          }, headerTitle: props => <HeaderWrapper {...props} /> }}>
+          }, headerTitle: props => <HeaderWrapper {...props}  /> }}>
           {props => <PetListScreen {...props} getdata={dogs} />} 
       </Stack.Screen>
        
@@ -131,7 +122,8 @@ function CatsScreen() {
             height: 100,
             elevation: 0, // remove shadow on Android
             shadowOpacity: 0, // remove shadow on iOS
-          }, headerTitle: props => <HeaderWrapper {...props} /> }}>
+          }, 
+          headerTitle: props => <HeaderWrapper {...props} /> }}>
           {props => <PetListScreen {...props} getdata={cats} />} 
       </Stack.Screen>
     </Stack.Navigator>
@@ -195,6 +187,8 @@ const NavigationDrawerStructure = (props) => {
     </View>
   );
 };
+
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -226,21 +220,21 @@ export default function App() {
           options={{ drawerIcon: config => <MaterialCommunityIcons
             size={23}
             name="heart" color="grey"/>, drawerLabel: 'Favorites' }}
-          component={NotificationsScreen}
+          component={PetScreen}
         />
         <Drawer.Screen
           name="Messages"
           options={{ drawerIcon: config => <MaterialCommunityIcons
             size={23}
             name="message-text" color="grey"/>, drawerLabel: 'Messages' }}
-          component={NotificationsScreen}
+          component={PetScreen}
         />
         <Drawer.Screen
           name="Profile"
           options={{ drawerIcon: config => <Ionicons
             size={23}
             name="ios-person-sharp" color="grey"/>, drawerLabel: 'Profile' }}
-          component={NotificationsScreen}
+          component={PetScreen}
         />
 
       </Drawer.Navigator>
